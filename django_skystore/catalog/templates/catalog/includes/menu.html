@@ -1,20 +1,18 @@
-@"
-<nav class=""navbar navbar-expand-lg navbar-dark bg-dark"">
-    <div class=""container"">
-        <a class=""navbar-brand"" href=""{% url 'catalog:home' %}"">SkyStore</a>
-        <button class=""navbar-toggler"" type=""button"" data-bs-toggle=""collapse"" data-bs-target=""#navbarNav"">
-            <span class=""navbar-toggler-icon""></span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'catalog:home' %}">SkyStore</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div class=""collapse navbar-collapse"" id=""navbarNav"">
-            <ul class=""navbar-nav"">
-                <li class=""nav-item"">
-                    <a class=""nav-link"" href=""{% url 'catalog:home' %}"">Каталог</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'catalog:home' %}">Каталог</a>
                 </li>
-                <li class=""nav-item"">
-                    <a class=""nav-link"" href=""{% url 'catalog:contacts' %}"">Контакты</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'catalog:contacts' %}">Контакты</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-"@ | Out-File -FilePath catalog\templates\catalog\includes\menu.html -Encoding utf8
