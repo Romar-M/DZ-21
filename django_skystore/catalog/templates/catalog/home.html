@@ -1,31 +1,34 @@
-@"
 {% extends 'catalog/base.html' %}
+
 {% block title %}Главная - SkyStore{% endblock %}
+
 {% block content %}
-<div class=""pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"">
-    <h1 class=""display-4"">SkyStore</h1>
-    <p class=""lead"">Лучшие цифровые товары для ваших проектов</p>
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">SkyStore</h1>
+    <p class="lead">Лучшие цифровые товары для ваших проектов</p>
 </div>
-<div class=""row"">
+
+<div class="row">
     {% for product in products %}
-    <div class=""col-md-4 mb-4"">
-        <div class=""card h-100 shadow-sm"">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
             {% if product.image %}
-                <img src=""{{ product.image.url }}"" class=""card-img-top"" alt=""{{ product.name }}"">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
             {% else %}
-                <div class=""card-img-top bg-light text-center py-5"">Нет изображения</div>
+                <div class="card-img-top bg-light text-center py-5">Нет изображения</div>
             {% endif %}
-            <div class=""card-body d-flex flex-column"">
-                <h5 class=""card-title"">{{ product.name }}</h5>
-                <p class=""card-text"">{{ product.description|truncatechars:100 }}</p>
-                <p class=""card-text mt-auto""><strong>{{ product.price }} ₽</strong></p>
-                <a href=""{% url 'catalog:product_detail' product.pk %}"" class=""btn btn-primary mt-2"">Подробнее</a>
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                <p class="card-text mt-auto"><strong>{{ product.price }} ₽</strong></p>
+                <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-primary mt-2">Подробнее</a>
             </div>
         </div>
     </div>
     {% empty %}
-    <div class=""col-12 text-center""><p>Товаров пока нет. Зайдите позже.</p></div>
+    <div class="col-12 text-center">
+        <p>Товаров пока нет. Зайдите позже.</p>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}
-"@ | Out-File -FilePath catalog\templates\catalog\home.html -Encoding utf8

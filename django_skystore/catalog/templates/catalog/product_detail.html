@@ -1,24 +1,24 @@
-@"
 {% extends 'catalog/base.html' %}
+
 {% block title %}{{ product.name }}{% endblock %}
+
 {% block content %}
-<div class=""row"">
-    <div class=""col-md-6"">
+<div class="row">
+    <div class="col-md-6">
         {% if product.image %}
-            <img src=""{{ product.image.url }}"" class=""img-fluid"" alt=""{{ product.name }}"">
+            <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
         {% else %}
-            <div class=""alert alert-secondary"">Нет изображения</div>
+            <div class="alert alert-secondary">Нет изображения</div>
         {% endif %}
     </div>
-    <div class=""col-md-6"">
+    <div class="col-md-6">
         <h1>{{ product.name }}</h1>
-        <p class=""lead"">{{ product.description }}</p>
+        <p class="lead">{{ product.description }}</p>
         <p><strong>Цена:</strong> {{ product.price }} руб.</p>
         <p><strong>Категория:</strong> {{ product.category.name }}</p>
-        <p><strong>Дата добавления:</strong> {{ product.created_at|date:""d.m.Y H:i"" }}</p>
-        <p><strong>Последнее изменение:</strong> {{ product.updated_at|date:""d.m.Y H:i"" }}</p>
-        <a href=""{% url 'catalog:home' %}"" class=""btn btn-secondary"">Назад к каталогу</a>
+        <p><strong>Дата добавления:</strong> {{ product.created_at|date:"d.m.Y H:i" }}</p>
+        <p><strong>Последнее изменение:</strong> {{ product.updated_at|date:"d.m.Y H:i" }}</p>
+        <a href="{% url 'catalog:home' %}" class="btn btn-secondary">Назад к каталогу</a>
     </div>
 </div>
 {% endblock %}
-"@ | Out-File -FilePath catalog\templates\catalog\product_detail.html -Encoding utf8
