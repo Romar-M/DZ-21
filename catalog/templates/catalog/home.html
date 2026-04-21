@@ -13,7 +13,7 @@
     <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm">
             {% if product.image %}
-                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
             {% else %}
                 <div class="card-img-top bg-light text-center py-5">Нет изображения</div>
             {% endif %}
