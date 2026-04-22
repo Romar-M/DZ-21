@@ -1,20 +1,27 @@
-from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView, TemplateView
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
 from .models import Product
 
-def home(request):
-    products = Product.objects.all()
-    return render(request, 'catalog/home.html', {'products': products})
+class HomeView(ListView):
+    model = Product
+    template_name = 'catalog/home.html'
+    context_object_name = 'products'
 
-def contacts(request):
-    if request.method == 'POST':
-        # Вывод данных формы в консоль
-        print("=== НОВОЕ СООБЩЕНИЕ С ФОРМЫ ===")
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
+
+class ContactsView(TemplateView):
+    template_name = 'catalog/contacts.html'
+
+    def post(self, request, *args, **kwargs):
+        # Обработка формы
+        print("=== НОВОЕ СООБЩЕНИЕ ===")
         print("Имя:", request.POST.get('name'))
         print("Email:", request.POST.get('email'))
         print("Сообщение:", request.POST.get('message'))
-        return render(request, 'catalog/contacts.html', {'success': True})
-    return render(request, 'catalog/contacts.html')
-
-def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    return render(request, 'catalog/product_detail.html', {'product': product})
+        context = self.get_context_data(**kwargs)
+        context['success'] = True
+        return self.render_to_response(context)
