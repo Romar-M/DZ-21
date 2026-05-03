@@ -1,6 +1,7 @@
 {% extends 'catalog/base.html' %}
 
 {% block title %}Главная - SkyStore{% endblock %}
+<a href="{% url 'catalog:product_create' %}" class="btn btn-success mb-3">Добавить товар</a>
 
 {% block content %}
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -22,6 +23,8 @@
                 <p class="card-text">{{ product.description|truncatechars:100 }}</p>
                 <p class="card-text mt-auto"><strong>{{ product.price }} ₽</strong></p>
                 <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-primary mt-2">Подробнее</a>
+                <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-sm btn-secondary">Редактировать</a>
+                <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-sm btn-danger">Удалить</a>
             </div>
         </div>
     </div>
