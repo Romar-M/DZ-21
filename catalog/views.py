@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from .models import Product
 from .forms import ProductForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class HomeView(ListView):
     model = Product
@@ -43,3 +44,9 @@ class ContactsView(TemplateView):
         context = self.get_context_data(**kwargs)
         context['success'] = True
         return self.render_to_response(context)
+
+
+
+class ProductCreateView(LoginRequiredMixin, CreateView): ...
+class ProductUpdateView(LoginRequiredMixin, UpdateView): ...
+class ProductDeleteView(LoginRequiredMixin, DeleteView): ...
