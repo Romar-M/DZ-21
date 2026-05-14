@@ -1,37 +1,17 @@
-{% extends 'catalog/base.html' %}
-
-{% block title %}Главная - SkyStore{% endblock %}
-<a href="{% url 'catalog:product_create' %}" class="btn btn-success mb-3">Добавить товар</a>
-
-{% block content %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">SkyStore</h1>
-    <p class="lead">Лучшие цифровые товары для ваших проектов</p>
-</div>
-
-<div class="row">
-    {% for product in products %}
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
-            {% if product.image %}
-                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
-            {% else %}
-                <div class="card-img-top bg-light text-center py-5">Нет изображения</div>
+{% for product in products %}
+<div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+        ...
+        <div class="card-body d-flex flex-column">
+            ...
+            <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-primary mt-2">Подробнее</a>
+            {% if user.is_authenticated %}
+                {% if user == product.owner or user.has_perm 'catalog.can_unpublish_product' or user.has_perm 'catalog.delete_product' %}
+                    <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-sm btn-secondary mt-1">Редактировать</a>
+                    <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-sm btn-danger mt-1">Удалить</a>
+                {% endif %}
             {% endif %}
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.description|truncatechars:100 }}</p>
-                <p class="card-text mt-auto"><strong>{{ product.price }} ₽</strong></p>
-                <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-primary mt-2">Подробнее</a>
-                <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-sm btn-secondary">Редактировать</a>
-                <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-sm btn-danger">Удалить</a>
-            </div>
         </div>
     </div>
-    {% empty %}
-    <div class="col-12 text-center">
-        <p>Товаров пока нет. Зайдите позже.</p>
-    </div>
-    {% endfor %}
 </div>
-{% endblock %}
+{% endfor %}
